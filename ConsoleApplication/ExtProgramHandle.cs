@@ -27,7 +27,7 @@ namespace Jarvis
         
         public string prog_path,win_class, win_name;
         public IntPtr win_handle;
-        private Process p;
+        public Process p;
         private int processID,prog_number=0;
         static int total_programs = 0;
 
@@ -47,8 +47,9 @@ namespace Jarvis
             p.StartInfo.FileName = prog_path;
             p.StartInfo.Domain = "RR";
             if (!p.Start())
-                MessageBox.Show("Program not Started - " + prog_path.Substring(prog_path.LastIndexOf('/')));
+                MessageBox.Show("Program not Started - " + prog_path.Substring(prog_path.LastIndexOf('\\')+1));
             processID = p.Id;
+            MessageBox.Show(p.Id.ToString());
             if (find_win_handle_F())
                 return true;
 
@@ -66,7 +67,7 @@ namespace Jarvis
                 count++;
                 if (count > 150)
                 {
-                    MessageBox.Show("TimwOut - Handle not found for -" + prog_path.Substring(prog_path.LastIndexOf('/')));
+                    MessageBox.Show("TimwOut - Handle not found for -" + prog_path.Substring(prog_path.LastIndexOf('\\')+1));
                     return false;
                 }
             }
@@ -78,7 +79,14 @@ namespace Jarvis
 
         public void exitApplication()
         {
-            p.Kill();
+            try
+            {
+                p.Kill();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("FAILED TO KILL - " + prog_path.Substring(prog_path.LastIndexOf('\\')+1) +e.Message);
+            }
         }
 
 
