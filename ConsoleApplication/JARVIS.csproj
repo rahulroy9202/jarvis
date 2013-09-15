@@ -37,11 +37,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="InputSimulator">
-      <HintPath>..\..\InputSimulator.dll</HintPath>
-    </Reference>
     <Reference Include="libpxcclr">
-      <HintPath>..\..\libpxcclr.dll</HintPath>
+      <HintPath>..\libpxcclr.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExtProgramHandle.cs" />
+    <Compile Include="JarvisMouse.cs" />
     <Compile Include="MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +75,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

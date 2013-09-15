@@ -121,13 +121,6 @@ namespace Jarvis
     }
 }
 
-    public enum Mouse_Event : int
-    {
-        Left_button_Down = 2,
-        Left_button_Up = 4,
-        Right_button_Down = 8,
-        Right_button_Up = 16
-    }
 
     public enum ShowState : int
     {

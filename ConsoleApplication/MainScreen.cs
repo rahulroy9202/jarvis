@@ -13,10 +13,10 @@ namespace Jarvis
         {
             this.session = session;
             InitializeComponent();
-            MouseClick += new MouseEventHandler(MainScreen_MouseClick);
+            //MouseClick += new MouseEventHandler(MainScreen_MouseClick);
             //MouseHover += new MouseEventHandler(MainScreen_MouseClick);
-            MouseMove += new MouseEventHandler(MainScreen_MouseMove);
-            this.WindowState = FormWindowState.Maximized;
+            //MouseMove += new MouseEventHandler(MainScreen_MouseMove);
+            //this.WindowState = FormWindowState.Maximized;
         }
 
         void MainScreen_MouseMove(object sender, MouseEventArgs e)

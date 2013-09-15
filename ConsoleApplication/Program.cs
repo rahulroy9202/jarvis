@@ -50,21 +50,25 @@ namespace Jarvis
             chrome.exitApplication();
             */
             #endregion
-
             
-
+            
+            
             #region //GUI MAIN APPLICATION
-            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             PXCMSession session = null;
             pxcmStatus sts = PXCMSession.CreateInstance(out session);
-
+            
             if (sts >= pxcmStatus.PXCM_STATUS_NO_ERROR)
             {
-                Application.Run(new MainScreen(session));
+                MainScreen mscreen = new MainScreen(session);
+                JarvisMouse myMouse = new JarvisMouse(mscreen);
+                Thread mouse_worker = new Thread(myMouse.query_mouse);
+                mouse_worker.Start();
+                Application.Run(mscreen);
                 session.Dispose();
+                mouse_worker.Abort();
             }
              
             #endregion
