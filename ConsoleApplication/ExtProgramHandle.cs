@@ -8,6 +8,8 @@ namespace Jarvis
 {
     internal class ExtProgramHandle
     {
+        #region ASSEMBLY IMPORTS
+        
         //WINDOW
         [DllImport("USER32.DLL", CharSet = CharSet.Unicode)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
@@ -23,8 +25,8 @@ namespace Jarvis
         private static extern bool SetCursorPos(int X, int Y);
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+        #endregion
 
-        
         public string prog_path,win_class, win_name;
         public IntPtr win_handle;
         public Process p;
@@ -81,6 +83,7 @@ namespace Jarvis
         {
             try
             {
+                p.CloseMainWindow();
                 p.Kill();
             }
             catch (Exception e)
@@ -90,7 +93,7 @@ namespace Jarvis
         }
 
 
-//WORKING FINE
+
         //bring to front
         public void bring_to_ForeGround()
         {

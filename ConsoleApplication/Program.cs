@@ -19,7 +19,10 @@ namespace Jarvis
 
         [STAThread]
         private static void Main()
-        {/*
+        {
+            #region //IE Handle
+
+            /*
             string ie_path = @"C:\Program Files\Internet Explorer\iexplore.exe";
             string ie_win_class = "IEFrame";
             string ie_win_nm = "New Tab - Windows Internet Explorer";
@@ -30,16 +33,27 @@ namespace Jarvis
             ie_handle.exitApplication();
             Thread.Sleep(2000);
            
+            */
+            #endregion
+
+            //MessageBox.Show(Control.MousePosition.ToString());
+            
+            #region //Chrome Handle
+            /*
             string chrom_path = @"C:\Users\Rahul Roy\AppData\Local\Google\Chrome\Application\chrome.exe";
             ExtProgramHandle chrome = new ExtProgramHandle(chrom_path, "Chrome_WidgetWin_1", "New Tab - Google Chrome");
             //MessageBox.Show(chrome.win_class + "   " + chrome.win_name + "   " + chrome.prog_path);
             //chrome.set_show_state(ShowState.SW_MINIMIZE);
-            //chrome.bring_to_ForeGround();
+            chrome.bring_to_ForeGround();
             chrome.p.Exited += new EventHandler(p_Exited);
 
             chrome.exitApplication();
             */
+            #endregion
 
+            
+
+            #region //GUI MAIN APPLICATION
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -52,6 +66,8 @@ namespace Jarvis
                 Application.Run(new MainScreen(session));
                 session.Dispose();
             }
+             
+            #endregion
         }
 
         static void p_Exited(object sender, EventArgs e)
