@@ -1,0 +1,221 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BD349564-AF60-4C31-9F34-E476ED4A4BA5}</ProjectGuid>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>libpxcclr</RootNamespace>
+    <ProjectName>libpxcclr</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\$(Platform)\</OutDir>
+    <IntDir>build\$(Platform)_$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\$(Platform)\</OutDir>
+    <IntDir>build\$(Platform)_$(Configuration)\$(ProjectName)\</IntDir>
+    <EnableManagedIncrementalBuild>false</EnableManagedIncrementalBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\$(Platform)\</OutDir>
+    <IntDir>build\$(Platform)_$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\$(Platform)\</OutDir>
+    <IntDir>build\$(Platform)_$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>include;..\..\..\include;..\..\..\sample\common\include;..\..\..\sample\common\res;$(PCSDK_DIR)/include;$(PCSDK_DIR)/sample/common/include;$(PCSDK_DIR)/sample/common/res</AdditionalIncludeDirectories>
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Advapi32.lib</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>include;..\..\..\include;..\..\..\sample\common\include;..\..\..\sample\common\res;$(PCSDK_DIR)/include;$(PCSDK_DIR)/sample/common/include;$(PCSDK_DIR)/sample/common/res</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>include;..\..\..\include;..\..\..\sample\common\include;..\..\..\sample\common\res;$(PCSDK_DIR)/include;$(PCSDK_DIR)/sample/common/include;$(PCSDK_DIR)/sample/common/res</AdditionalIncludeDirectories>
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Advapi32.lib</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>include;..\..\..\include;..\..\..\sample\common\include;..\..\..\sample\common\res;$(PCSDK_DIR)/include;$(PCSDK_DIR)/sample/common/include;$(PCSDK_DIR)/sample/common/res</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>include;..\..\..\include;..\..\..\sample\common\include;..\..\..\sample\common\res;$(PCSDK_DIR)/include;$(PCSDK_DIR)/sample/common/include;$(PCSDK_DIR)/sample/common/res</AdditionalIncludeDirectories>
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Advapi32.lib</AdditionalDependencies>
+      <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>include;..\..\..\include;..\..\..\sample\common\include;..\..\..\sample\common\res;$(PCSDK_DIR)/include;$(PCSDK_DIR)/sample/common/include;$(PCSDK_DIR)/sample/common/res</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalIncludeDirectories>include;..\..\..\include;..\..\..\sample\common\include;..\..\..\sample\common\res;$(PCSDK_DIR)/include;$(PCSDK_DIR)/sample/common/include;$(PCSDK_DIR)/sample/common/res</AdditionalIncludeDirectories>
+      <CallingConvention>StdCall</CallingConvention>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Advapi32.lib</AdditionalDependencies>
+      <CLRThreadAttribute>MTAThreadingAttribute</CLRThreadAttribute>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>include;..\..\..\include;..\..\..\sample\common\include;..\..\..\sample\common\res;$(PCSDK_DIR)/include;$(PCSDK_DIR)/sample/common/include;$(PCSDK_DIR)/sample/common/res</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\sample\common\src\util_capture.cpp" />
+    <ClCompile Include="..\..\..\sample\common\src\util_captureimpl.cpp" />
+    <ClCompile Include="..\..\..\sample\common\src\util_capture_file.cpp" />
+    <ClCompile Include="..\..\..\sample\common\src\util_pipeline_face.cpp" />
+    <ClCompile Include="..\..\..\sample\common\src\util_pipeline_gesture.cpp" />
+    <ClCompile Include="..\..\..\sample\common\src\util_pipeline_raw.cpp" />
+    <ClCompile Include="..\..\..\sample\common\src\util_pipeline_segmentation.cpp" />
+    <ClCompile Include="..\..\..\sample\common\src\util_pipeline_voice.cpp" />
+    <ClCompile Include="..\..\..\src\libpxc\libpxc.cpp" />
+    <ClCompile Include="src\AssemblyInfo.cpp" />
+    <ClCompile Include="src\pxcmaccelerator.cpp" />
+    <ClCompile Include="src\pxcmaudio.cpp" />
+    <ClCompile Include="src\pxcmbase.cpp" />
+    <ClCompile Include="src\pxcmcapture.cpp" />
+    <ClCompile Include="src\pxcmface.cpp" />
+    <ClCompile Include="src\pxcmgesture.cpp" />
+    <ClCompile Include="src\pxcmimage.cpp" />
+    <ClCompile Include="src\pxcmmetadata.cpp" />
+    <ClCompile Include="src\pxcmpowerstate.cpp" />
+    <ClCompile Include="src\pxcmprojection.cpp" />
+    <ClCompile Include="src\pxcmscheduler.cpp" />
+    <ClCompile Include="src\pxcmsegmentation.cpp" />
+    <ClCompile Include="src\pxcmsession.cpp" />
+    <ClCompile Include="src\pxcmvoice.cpp" />
+    <ClCompile Include="src\utilm_capture.cpp" />
+    <ClCompile Include="src\utilm_capture_file.cpp" />
+    <ClCompile Include="src\utilm_pipeline.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\pxcmaccelerator.h" />
+    <ClInclude Include="include\pxcmaudio.h" />
+    <ClInclude Include="include\pxcmbase.h" />
+    <ClInclude Include="include\pxcmcapture.h" />
+    <ClInclude Include="include\pxcmdefs.h" />
+    <ClInclude Include="include\pxcmface.h" />
+    <ClInclude Include="include\pxcmgesture.h" />
+    <ClInclude Include="include\pxcmimage.h" />
+    <ClInclude Include="include\pxcmmetadata.h" />
+    <ClInclude Include="include\pxcmpowerstate.h" />
+    <ClInclude Include="include\pxcmscheduler.h" />
+    <ClInclude Include="include\pxcmsegmentation.h" />
+    <ClInclude Include="include\pxcmsession.h" />
+    <ClInclude Include="include\pxcmstatus.h" />
+    <ClInclude Include="include\pxcmvoice.h" />
+    <ClInclude Include="include\utilm_capture.h" />
+    <ClInclude Include="include\utilm_capture_file.h" />
+    <ClInclude Include="include\utilm_pipeline.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="libpxcclr.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
