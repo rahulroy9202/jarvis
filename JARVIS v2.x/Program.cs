@@ -76,12 +76,21 @@ namespace Jarvis
                     Thread mouse_worker = new Thread(myMouse.query_mouse);
                     mouse_worker.Start();
                     Application.Run(mscreen);
-                    session.Dispose();
-                    mouse_worker.Abort();
-                    GR.Dispose();
-                    VR.Dispose();
-                    mscreen.Dispose();
-                    Application.Exit();
+                    try
+                    {
+                        
+                        mouse_worker.Abort();
+                        GR.Dispose();
+                        VR.Dispose();
+                        mscreen.Dispose();
+                        session.Dispose();
+                        Thread.Sleep(50);
+                        Application.Exit();
+                    }
+                    catch (Exception i) { 
+                        Application.Exit();
+                    }
+
                 }
 
                 #endregion //GUI MAIN APPLICATION

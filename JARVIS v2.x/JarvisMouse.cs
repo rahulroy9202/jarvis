@@ -60,11 +60,63 @@ namespace Jarvis
             query_mouse();
         }
 
-        public void modify_mouse()
+        public static void leftClick()
+        {
+            Mouse_Event(Mouse_Evnt.Left_button_Down);
+            Mouse_Event(Mouse_Evnt.Left_button_Up);
+        }
+
+
+        public static void SingleleftClick()
+        {
+            if (counter == 0)
+            {
+                Mouse_Event(Mouse_Evnt.Left_button_Down);
+                clickInit = DateTime.Now;
+            }
+
+            counter++;
+            timeElapsed = DateTime.Now;
+            if (timeElapsed - clickInit > threshold)
+            {
+                counter = 0;
+                Mouse_Event(Mouse_Evnt.Left_button_Up);
+                return;
+            }
+            mousDoubleClick();
+        }
+
+
+        static int counter=0;
+        static DateTime clickInit,timeElapsed;
+        static TimeSpan threshold=new TimeSpan(2);
+        public static void mousDoubleClick()
+        {
+            if (counter == 0)
+            {
+                JarvisMouse.leftClick();
+                clickInit = DateTime.Now;
+            }
+
+            counter++;
+            timeElapsed = DateTime.Now;
+            
+            if (timeElapsed - clickInit > threshold)
+            {
+                counter = 0;
+                JarvisMouse.leftClick();
+                return;
+            }
+            mousDoubleClick();
+        }
+
+
+        public static void modify_mouse(Point _point)
         {
             try
             {
                 SetCursorPosition(_point.X, _point.Y);
+                Thread.Sleep(10);
             }
             catch (Exception e)
             {//nothing
@@ -86,14 +138,15 @@ namespace Jarvis
             SetCursorPos(x, y);
         }
 
-        public static void Mouse_Event(Mouse_Event e, int x, int y)
+        public static void Mouse_Event(Mouse_Evnt e)
         {
-            mouse_event((int)e, x, y, 0, 0);
+            Point p = GetCursorPosition();
+            mouse_event((int)e, p.X, p.Y, 0, 0);
         }
     }
 }
 
-public enum Mouse_Event : int
+public enum Mouse_Evnt : int
 {
     Left_button_Down = 2,
     Left_button_Up = 4,

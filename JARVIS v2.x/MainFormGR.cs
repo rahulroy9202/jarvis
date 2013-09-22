@@ -127,7 +127,7 @@ namespace Jarvis
 
         private void DoRecognition()
         {
-            GestureRecognition gr = new GestureRecognition(this);
+            GestureRecognition gr = new GestureRecognition(this,mainScreen);
             if (simpleToolStripMenuItem.Checked)
             {
                 gr.SimplePipeline();

@@ -107,6 +107,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandler.cs" />
     <Compile Include="ExtProgramHandle.cs" />
     <Compile Include="GestureRecognition.cs" />
     <Compile Include="JarvisMouse.cs" />

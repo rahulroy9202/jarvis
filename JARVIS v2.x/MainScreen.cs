@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
+
 namespace Jarvis
 {
     public partial class MainScreen : Form
@@ -112,6 +113,8 @@ namespace Jarvis
 
         protected override void OnClosed(EventArgs e)
         {
+            button3_Click(this, new EventArgs());
+            
             GR.Dispose();
             VR.Dispose();
             base.OnClosed(e);

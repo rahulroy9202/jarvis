@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.Text;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Jarvis
 {
@@ -30,13 +33,25 @@ namespace Jarvis
         [DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+
+
+
         #endregion ASSEMBLY IMPORTS
 
         public string prog_path, win_class, win_name;
         public IntPtr win_handle;
+        public static IntPtr active_win_handle,prev_win_handle;
         public Process p;
         private int processID, prog_number = 0;
         private static int total_programs = 0;
+        static Stack<IntPtr> winHandles=new Stack<IntPtr>();
+
+
 
         //pass null if unknown; path is must;
         public ExtProgramHandle(string p_Path, string w_class, string w_name)
@@ -44,7 +59,7 @@ namespace Jarvis
             this.prog_path = p_Path;
             this.win_class = w_class;
             this.win_name = w_name;
-            start_Program();
+            //start_Program();
         }
 
         public bool start_Program()
@@ -57,11 +72,49 @@ namespace Jarvis
                 MessageBox.Show("Program not Started - " + prog_path.Substring(prog_path.LastIndexOf('\\') + 1));
             processID = p.Id;
             MessageBox.Show(p.Id.ToString());
+            Thread.Sleep(500);
+            if(win_name==null)
+                win_name = GetActiveWindowTitle();
             if (find_win_handle_F())
+            {
                 return true;
+            }
 
             return false;
         }
+
+        public static bool pass_string(string x)
+        {
+            try
+            {
+                SendKeys.SendWait(x);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return true;
+        }
+
+        private static IntPtr GetActiveWindowHandle()
+        {
+            IntPtr handle = IntPtr.Zero;
+            handle = GetForegroundWindow();
+            return handle;
+        }
+
+        private static string GetActiveWindowTitle()
+        {
+            IntPtr handle = GetActiveWindowHandle();
+            const int nChars = 256;            
+            StringBuilder Buff = new StringBuilder(nChars);
+            if (GetWindowText(handle, Buff, nChars) > 0)
+            {
+                return Buff.ToString();
+            }
+            return null;
+        }
+
 
         public bool find_win_handle_F()
         {
@@ -102,11 +155,31 @@ namespace Jarvis
         }
 
         //maximize,minimize,hide etc
-        public bool set_show_state(ShowState s_state)
+        public static bool set_show_state(ShowState s_state)
         {
-            ShowWindow(win_handle, (int)s_state);
+            active_win_handle = GetActiveWindowHandle();           
+            ShowWindow(active_win_handle, (int)s_state);
+            if (s_state == ShowState.SW_HIDE || s_state == ShowState.SW_MINIMIZE)
+            {
+                //prev_win_handle = active_win_handle;
+                winHandles.Push(active_win_handle);
+                active_win_handle = GetActiveWindowHandle();
+            }
+
+            return true;
+        }
+        
+        //restore
+        public static bool restore_prev_win(ShowState s_state)
+        {
+            if (winHandles.Peek() != IntPtr.Zero)
+            {
+                ShowWindow(winHandles.Pop(), (int)s_state);
+                return true;
+            }
             return false;
         }
+
 
         //set cursor position
         public static void set_cursor_pos(int x, int y)
@@ -115,7 +188,7 @@ namespace Jarvis
         }
 
         //simulate mouse event
-        public static void Mouse_Event(Mouse_Event e, int x, int y)
+        public static void Mouse_Event(Mouse_Evnt e, int x, int y)
         {
             mouse_event((int)e, x, y, 0, 0);
         }

@@ -294,6 +294,7 @@ namespace Jarvis
 
         public void PrintConsole(string line)
         {
+            CommandHandler.parseCommand(line);
             if (this.Visible == true)
                 Console2.Invoke(new TreeViewUpdateDelegate(delegate(string line1) { Console2.Nodes.Add(line1).EnsureVisible(); }), new object[] { line });
 
